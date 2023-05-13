@@ -64,7 +64,7 @@ const Home = ({ location }) => {
                 ))}
             </select>
             <div className='date-time'>
-              <input type='date' id='date-inputs' onChange={handleDateChange} />
+              <input type='date' id='date-inputs' onChange={handleDateChange} min={new Date().toISOString().split('T')[0]}  />
 
               <input
                 type='time'

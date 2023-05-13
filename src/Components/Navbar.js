@@ -31,10 +31,10 @@ const Navbar = ({ user, role }) => {
           <>
             {role === 'User' && (
               <>
-                <div class='btn-group'>
+                <div className='btn-group'>
                   <button
                     type='button'
-                    class='btn btn-danger dropdown-toggle'
+                    className='btn btn-danger dropdown-toggle'
                     data-toggle='dropdown'
                     aria-haspopup='true'
                     aria-expanded='false'
@@ -42,16 +42,19 @@ const Navbar = ({ user, role }) => {
                     {user}
                   </button>
 
-                  <div class='dropdown-menu dpm'>
-                    <a class='dropdown-item' href='/myprofile'>
-                      My Appointments
+                  <div className='dropdown-menu dpm'>
+                    <a className='dropdown-item' href='/allrides'>
+                      My Rides
+                    </a>
+                    <a className='dropdown-item' href='/allchats'>
+                      My Chats
                     </a>
 
-                    <div class='dropdown-divider'></div>
+                    <div className='dropdown-divider'></div>
 
                     <button
                       onClick={handleLogout}
-                      class='dropdown-item'
+                      className='dropdown-item'
                       href='#'
                     >
                       Logout
@@ -64,10 +67,10 @@ const Navbar = ({ user, role }) => {
               </>
             )}
             {role === 'admin' && (
-              <div class='btn-group'>
+              <div className='btn-group'>
                 <button
                   type='button'
-                  class='btn btn-danger dropdown-toggle'
+                  className='btn btn-danger dropdown-toggle'
                   data-toggle='dropdown'
                   aria-haspopup='true'
                   aria-expanded='false'
@@ -77,13 +80,13 @@ const Navbar = ({ user, role }) => {
                 <button onClick={togglePost} className='pos nav-btn'>
                   Post a Ride
                 </button>
-                <div class='dropdown-menu dpm'>
-                  <a class='dropdown-item' href='/adminpanel'>
+                <div className='dropdown-menu dpm'>
+                  <a className='dropdown-item' href='/adminpanel'>
                     View Appointments
                   </a>
 
-                  <div class='dropdown-divider'></div>
-                  <button onClick={handleLogout} class='dropdown-item' href='#'>
+                  <div className='dropdown-divider'></div>
+                  <button onClick={handleLogout} className='dropdown-item' href='#'>
                     Logout
                   </button>
                 </div>
@@ -110,7 +113,7 @@ const Navbar = ({ user, role }) => {
           <div className='popup'>
             <Login />
             <button className='cls-btn' onClick={togglePopup}>
-              <i class='fa-solid fa-xmark'></i>
+              <i className='fa-solid fa-xmark'></i>
             </button>
           </div>
         </div>
@@ -120,7 +123,7 @@ const Navbar = ({ user, role }) => {
           <div className='popup'>
             <PostRide />
             <button className='cls-btn' onClick={togglePost}>
-              <i class='fa-solid fa-xmark'></i>
+              <i className='fa-solid fa-xmark'></i>
             </button>
           </div>
         </div>

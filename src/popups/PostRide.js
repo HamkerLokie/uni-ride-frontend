@@ -14,12 +14,13 @@ const PostRide = () => {
   const [vehicleNumber, setvehicleNumber] = useState('')
   const [date, setSelectedDate] = useState('')
   const [time, setTime] = useState('')
+  const [vehicleType, setVehicleType] = useState('Bike')
+
   const [location, setLocation] = useState([])
 
   const onTimeChange = time => {
     setTime(time)
   }
-  
 
   const handleDateChange = event => {
     setSelectedDate(event.target.value)
@@ -41,10 +42,10 @@ const PostRide = () => {
   }
 
   const override = {
-    display: "block",
-    margin: "0 auto",
-    borderColor: "red",
-  };
+    display: 'block',
+    margin: '0 auto',
+    borderColor: 'red'
+  }
 
   const postRide = async e => {
     e.preventDefault()
@@ -56,7 +57,7 @@ const PostRide = () => {
       console.log(from, to)
       const response = await axios.post(
         'post-ride',
-        { from, to, date, price, vehicleNumber, vehicle, maxPerson },
+        { from, to, date, time, price, vehicleType, vehicleNumber, vehicle, maxPerson },
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -76,7 +77,6 @@ const PostRide = () => {
 
   return (
     <div className='postride'>
-     
       <form>
         <div className='from'>
           <select name='from' id='from'>
@@ -118,6 +118,13 @@ const PostRide = () => {
             onChange={e => setprice(e.target.value)}
             placeholder='Charges'
           />
+          <select name='' id=''  onChange={e => setVehicleType(e.target.value)}>
+            <option value='' disabled>
+              Vehicle Type
+            </option>
+            <option value='Bike'>Bike</option>
+            <option value='Car'>Car</option>
+          </select>
           <input
             type='number'
             onChange={e => setmaxPerson(e.target.value)}

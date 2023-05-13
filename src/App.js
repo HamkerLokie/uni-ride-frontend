@@ -13,6 +13,7 @@ import {
 import Footer from './Components/Footer'
 import { useEffect, useState } from 'react'
 import PostRide from './popups/PostRide'
+import SeeRides from './pages/SeeRides'
 
 function App () {
   const [user, setUser] = useState(null)
@@ -37,7 +38,6 @@ function App () {
             Authorization: `Bearer ${utoken}`
           }
         })
-        console.log(response.data)
         setUser(response.data.validateOne.username)
         setRole(response.data.validateOne.role)
       } catch (error) {
@@ -83,12 +83,13 @@ function App () {
         <main>
           <Routes>
             <Route path='' element={<Home location={location}/>} />
+            <Route path='allrides' element={<SeeRides />} />
             <Route
               path=':from/:to/:date'
               element={<Rides location={location} />}
             />
             {token && (
-              <Route path='to-chat/:driverID' element={<InsideRides />} />
+              <Route path='to-chat/:rideId/:driverID' element={<InsideRides />} />
             )}
           </Routes>
         </main>
