@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import axios from '../axios'
 import token from '../token'
 import { format } from 'timeago.js'
 import { io } from 'socket.io-client'
 
-const Chatbox = ({ driver }) => {
+const Chatbox = ({ driver, start, cid }) => {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [text, setNewMessageText] = useState('')
   const [messages, setMessages] = useState([])
@@ -15,7 +14,7 @@ const Chatbox = ({ driver }) => {
   const [me, setMe] = useState(null)
   const socket = useRef()
   useEffect(() => {
-    socket.current = io('ws://localhost:8900')
+    socket.current = io('wss://uniride-echo.glitch.me')
     socket.current.on('getMessage', data => {
       setArrivalMessage({
         senderId: data.sendetId,
@@ -30,9 +29,8 @@ const Chatbox = ({ driver }) => {
   }, [arrivalMessage])
 
   useEffect(() => {
-    socket.current.on('getUsers', users => {
-      console.log('socket', users)
-    })
+
+    socket.current.on('getUsers', users => {})
   }, [])
 
   const handleChatClick = () => {
@@ -43,10 +41,7 @@ const Chatbox = ({ driver }) => {
       openchat.style.position = 'relative'
       openchat.style.top = '50%'
       openchat.style.left = '50%'
-    } else {
-      const openchat = document.querySelector('.openchat')
-      openchat.style.display = 'none'
-    }
+    } 
   }
 
   const messagesEndRef = useRef(null)
@@ -58,7 +53,7 @@ const Chatbox = ({ driver }) => {
     getConvo()
     getMessages()
     getUser()
-  }, [convId])
+  }, [convId, cid])
 
   const startConversation = async () => {
     if (driver) {
@@ -73,7 +68,6 @@ const Chatbox = ({ driver }) => {
           }
         )
         setConvId(response.data._id)
-        // console.log(response.data);
       } catch (error) {
         console.log(error)
       }
@@ -101,7 +95,16 @@ const Chatbox = ({ driver }) => {
   const getMessages = async () => {
     try {
       if (convId) {
+
         const res = await axios.get(`/mymsgs/${convId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        setMessages(res.data)
+      }
+      if (cid) {
+        const res = await axios.get(`/mymsgs/${cid}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -152,7 +155,7 @@ const Chatbox = ({ driver }) => {
     }
   }
 
-  useEffect(() => {}, [])
+ 
 
   useEffect(() => {
     const messageEls = document.querySelectorAll('.message.fade')
@@ -171,27 +174,53 @@ const Chatbox = ({ driver }) => {
             {isConv === true ? (
               <>
                 <button onClick={handleChatClick} className='click'>
-                  {isChatOpen ? 'Close Chat' : 'Continue Chat'}
+                  {isChatOpen ? 'Close Chat' :'Continue Chat' }
                 </button>
               </>
             ) : (
               <>
-                <button
-                  onClick={() => {
-                    handleChatClick()
-                    startConversation()
-                  }}
-                  className='click'
-                >
-                  Start Conversation
-                </button>
+                {me && driver && me === driver._id ? (
+                  <>
+                    <button disabled className='click'>
+                      Khud se Chat ?
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {!start ? (
+                      <button
+                        onClick={() => {
+                          handleChatClick()
+                          startConversation()
+                        }}
+                        className='click'
+                      >
+                        Start Conversation
+                      </button>
+                    ) : (
+                      <>
+                        {' '}
+                        <button
+                          onClick={() => {
+                            handleChatClick()
+                          }}
+                          className='click'
+                        >
+                          Conitnue Chat
+                        </button>
+                      </>
+                    )}
+                  </>
+                )}
               </>
             )}
           </div>
 
-          <div className={`chatcard ${isChatOpen ? 'open' : ''}`}>
-            <div className='chat-top'>{driver.username}</div>
-            <div className='chat-mid'>
+         
+
+          <div className={`chatcard ${isChatOpen ? 'open' : ''}`} >
+            <div className='chat-top'>{driver.username}  </div>
+            <div className='chat-mid'   >
               {messages.map(message => {
                 return (
                   <div key={message._id} ref={messagesEndRef}>

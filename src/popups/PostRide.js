@@ -3,7 +3,6 @@ import axios from '../axios'
 import toast from 'react-hot-toast'
 
 import token from '../token'
-import { useNavigate } from 'react-router-dom'
 
 const PostRide = () => {
   const [loading, setLoading] = useState(false)
@@ -40,12 +39,11 @@ const PostRide = () => {
       console.log(error)
     }
   }
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
 
-  const override = {
-    display: 'block',
-    margin: '0 auto',
-    borderColor: 'red'
-  }
+  const dayAfterTomorrow = new Date(new Date())
+  dayAfterTomorrow.setDate(new Date().getDate() + 2)
 
   const postRide = async e => {
     e.preventDefault()
@@ -57,7 +55,17 @@ const PostRide = () => {
       console.log(from, to)
       const response = await axios.post(
         'post-ride',
-        { from, to, date, time, price, vehicleType, vehicleNumber, vehicle, maxPerson },
+        {
+          from,
+          to,
+          date,
+          time,
+          price,
+          vehicleType,
+          vehicleNumber,
+          vehicle,
+          maxPerson
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -76,7 +84,7 @@ const PostRide = () => {
   }
 
   return (
-    <div className='postride'>
+    <div className='postride ppm'>
       <form>
         <div className='from'>
           <select name='from' id='from'>
@@ -92,6 +100,7 @@ const PostRide = () => {
                 )
               })}
           </select>
+
           <select name='to' id='to'>
             <option value='' disabled>
               To
@@ -104,7 +113,14 @@ const PostRide = () => {
                 </option>
               ))}
           </select>
-          <input type='date' id='date-inputs' onChange={handleDateChange} />
+
+          <input
+            max={dayAfterTomorrow.toISOString().split('T')[0]}
+            min={tomorrow.toISOString().split('T')[0]}
+            type='date'
+            id='date-inputs'
+            onChange={handleDateChange}
+          />
 
           <input
             type='time'
@@ -118,12 +134,13 @@ const PostRide = () => {
             onChange={e => setprice(e.target.value)}
             placeholder='Charges'
           />
-          <select name='' id=''  onChange={e => setVehicleType(e.target.value)}>
+          <select name='' id='' onChange={e => setVehicleType(e.target.value)}>
             <option value='' disabled>
               Vehicle Type
             </option>
             <option value='Bike'>Bike</option>
             <option value='Car'>Car</option>
+            <option value='Car'>Scooty</option>
           </select>
           <input
             type='number'

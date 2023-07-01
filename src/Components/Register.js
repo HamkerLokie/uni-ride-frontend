@@ -37,15 +37,12 @@ const Register = () => {
   }
   return (
     <>
-      {/* <section class='form-container r-f'>
-        
-      </section> */}
-
+     
       {loading &&
         toast('Saving You in Database...', {
           icon: '🔃'
         })}
-      <div class='form-container'>
+      <div class='form-containers'>
         <p class='title'>Register</p>
         <form class='form'>
           <div class='input-group'>

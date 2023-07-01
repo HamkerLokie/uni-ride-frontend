@@ -3,10 +3,14 @@ import axios from '../axios'
 import { useNavigate } from 'react-router-dom'
 import 'react-calendar/dist/Calendar.css'
 import toast from 'react-hot-toast'
+import { Dna } from 'react-loader-spinner'
+import Footer from '../Components/Footer'
 
 const Home = ({ location }) => {
   const navigate = useNavigate()
   const [selectedDate, setSelectedDate] = useState('')
+  const [loading, setLoading] = useState(false)
+
   const [time, setTime] = useState('')
 
   const onTimeChange = time => {
@@ -33,13 +37,14 @@ const Home = ({ location }) => {
   }, [])
 
   return (
+    <React.Fragment>
     <div className='home'>
       <section id='landing' className='landing'>
         <div className='left'>
           <h2>CHOOSE YOUR GO-TO-UNIVERSITY PARTNER</h2>
           <form action=''>
             <select name='from' id='from'>
-              <option value='' disabled>
+              <option value='' disabled selected>
                 From
               </option>
               {location &&
@@ -52,7 +57,7 @@ const Home = ({ location }) => {
                 })}
             </select>
             <select name='to' id='to'>
-              <option value='' disabled>
+              <option value='' disabled selected>
                 To
               </option>
 
@@ -64,7 +69,12 @@ const Home = ({ location }) => {
                 ))}
             </select>
             <div className='date-time'>
-              <input type='date' id='date-inputs' onChange={handleDateChange} min={new Date().toISOString().split('T')[0]}  />
+              <input
+                type='date'
+                id='date-inputs'
+                onChange={handleDateChange}
+                min={new Date().toISOString().split('T')[0]}
+              />
 
               <input
                 type='time'
@@ -100,7 +110,6 @@ const Home = ({ location }) => {
               />
             </div>
           </form>
-         
         </div>
         <div className='right'>
           <div className='imgs'>
@@ -205,7 +214,142 @@ const Home = ({ location }) => {
           </div>
         </div>
       </section>
+
+      <section className='developers'>
+        <h4>Developers</h4>
+        <div class='containerd'>
+          <div class='card-wrapper'>
+            <div class='card'>
+              <div class='card-image'>
+                <img 
+                  src='/devs/lokie.jpeg'
+                  alt='profile one'
+                />
+              </div>
+
+              <ul class='social-icons'>
+                <li>
+                  <a href=''>
+                    <i class='fa fa-facebook-f'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fa fa-instagram'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fa fa-twitter'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fa fa-dribbble'></i>
+                  </a>
+                </li>
+              </ul>
+
+              <div class='details'>
+                <h2>
+                  Lokendra 
+                  <br />
+                  <span class='job-title'>Full Stack Developer</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <div class='card-wrapper'>
+            <div class='card profile-two'>
+              <div class='card-image profile-img--two'>
+                <img
+                  src='https://image.ibb.co/c9rY6J/profile02.jpg'
+                  alt='profile two'
+                />
+              </div>
+
+              <ul class='social-icons'>
+                <li>
+                  <a href=''>
+                    <i class='fab fa-facebook-f'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fab fa-instagram'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fab fa-twitter'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fab fa-dribbble'></i>
+                  </a>
+                </li>
+              </ul>
+
+              <div class='details jane'>
+                <h2>
+                  <span className='namekomal'> Komal</span> 
+                  <br />
+                  <span  class='job-title'>UI Designer</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class='card-wrapper'>
+            <div class='card'>
+              <div class='card-image'>
+                <img
+                  src='/devs/yuvraj.jpg'
+                  alt='profile one'
+                />
+              </div>
+
+              <ul class='social-icons'>
+                <li>
+                  <a href=''>
+                    <i class='fa fa-facebook-f'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fa fa-instagram'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fa fa-twitter'></i>
+                  </a>
+                </li>
+                <li>
+                  <a href=''>
+                    <i class='fa fa-dribbble'></i>
+                  </a>
+                </li>
+              </ul>
+
+              <div class='details'>
+                <h2>
+                  Yuvraj
+                  <br />
+                  <span class='job-title'>Frontend Developer</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+    
+
+    <Footer/>
+
+    </React.Fragment>
   )
 }
 

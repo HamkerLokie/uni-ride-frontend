@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../popup.css'
 import Login from './Login'
@@ -17,13 +17,34 @@ const Navbar = ({ user, role }) => {
   console.log('nav', user, role)
   const handleLogout = () => {
     localStorage.clear()
+    window.location.reload(false)
     navigate('/')
+  }
+  useEffect(() => {
+    const check = localStorage.getItem('animationend')
+
+    const logo = document.querySelector('.logos')
+    if (!check) {
+      logo.classList.add('shake')
+    }
+  }, [])
+
+  function handleAnimationEnd (c) {
+    const check = localStorage.getItem('animationend')
+    const bikeImg = document.getElementById(c)
+    if (!check) {
+      bikeImg.classList.add('second-animation')
+    }
+  }
+
+  function handleStop () {
+    localStorage.setItem('animationend', 'true')
   }
   return (
     <div className='navbar'>
       <div className='left'>
         <a href='/' className='logo'>
-          <img src='/icons/logo.png' alt='' />
+          <img className='logos' src='/icons/logo.png' alt='' />
         </a>
       </div>
       <div className='right'>
@@ -43,7 +64,7 @@ const Navbar = ({ user, role }) => {
                   </button>
 
                   <div className='dropdown-menu dpm'>
-                    <a className='dropdown-item' href='/allrides'>
+                    <a className='dropdown-item' href='/myrides'>
                       My Rides
                     </a>
                     <a className='dropdown-item' href='/allchats'>
@@ -61,12 +82,12 @@ const Navbar = ({ user, role }) => {
                     </button>
                   </div>
                 </div>
-                <button onClick={togglePost} className='pos nav-btn'>
+                <button onClick={togglePost} className='nav-btn'>
                   Post a Ride
                 </button>
               </>
             )}
-            {role === 'admin' && (
+            {role === 'Z<(=XG+P9FD?MV3' && (
               <div className='btn-group'>
                 <button
                   type='button'
@@ -82,11 +103,18 @@ const Navbar = ({ user, role }) => {
                 </button>
                 <div className='dropdown-menu dpm'>
                   <a className='dropdown-item' href='/adminpanel'>
-                    View Appointments
+                    All Posted Rides
+                  </a>
+                  <a className='dropdown-item' href='/adminpanel'>
+                    All reports
                   </a>
 
                   <div className='dropdown-divider'></div>
-                  <button onClick={handleLogout} className='dropdown-item' href='#'>
+                  <button
+                    onClick={handleLogout}
+                    className='dropdown-item'
+                    href='#'
+                  >
                     Logout
                   </button>
                 </div>
@@ -95,14 +123,14 @@ const Navbar = ({ user, role }) => {
           </>
         ) : (
           <>
-            <a
+            <button
               style={{ textAlign: 'center' }}
               onClick={togglePopup}
               className='login-btn nav-btn'
             >
               Login
-            </a>
-            <button onClick={togglePost} className='pos nav-btn'>
+            </button>
+            <button onClick={togglePost} className='nav-btn'>
               Post a Ride
             </button>
           </>
@@ -119,15 +147,38 @@ const Navbar = ({ user, role }) => {
         </div>
       )}
       {postOPen && (
-        <div className='pop-overlay'>
-          <div className='popup'>
+        <div className='pop-overlay '>
+          <div className='popup '>
             <PostRide />
-            <button className='cls-btn' onClick={togglePost}>
-              <i className='fa-solid fa-xmark'></i>
+            <button className='cls-btn ' onClick={togglePost}>
+              <i className=' ccm fa-solid fa-xmark'></i>
             </button>
           </div>
         </div>
       )}
+
+      <div className='anbike'>
+        <img
+          onAnimationEnd={() => handleAnimationEnd('bike-img')}
+          className='anb'
+          src='/images/car.png'
+          alt=''
+        />
+        <img
+          onAnimationEnd={() => handleAnimationEnd('human')}
+          id='bike-img'
+          src='/images/bike.png'
+          alt=''
+        />
+        <img id='trre' src='/images/tree.png' alt='' />
+        <img
+          className='gif '
+          onAnimationEnd={handleStop}
+          id='human'
+          src='/images/running.gif'
+          alt=''
+        />
+      </div>
     </div>
   )
 }

@@ -3,6 +3,8 @@ import toast from 'react-hot-toast'
 import axios from '../axios'
 import Register from './Register'
 import './login.css'
+import { Dna } from 'react-loader-spinner'
+
 
 const Login = () => {
   const [email, setemail] = useState('')
@@ -38,7 +40,8 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.log(error)
+      toast.error('Check Credentials')
+      setLoading(false)
     }
   }
 
@@ -48,13 +51,25 @@ const Login = () => {
 
   return (
     <>
-      <section class='form-container'>
-        {/* {loading &&
-          toast('Loggin in...', {
-            icon: '🔃'
-          })} */}
-
-        <div class='form-container'>
+      {loading && (
+          <>
+            <div className='loader'>
+              <div className='pop-overlay'></div>
+              <Dna
+                height='100'
+                width='100'
+                color='#18206F'
+                secondaryColor='#FBCBDC'
+                radius='12.5'
+                ariaLabel='mutating-dots-loading'
+                wrapperStyle={{}}
+                wrapperClass='mutating-dots-loading'
+                visible={true}
+              />
+            </div>
+          </>
+        )}
+        <div class='form-containers'>
           <p class='title'>Login</p>
           <form class='form'>
             <div class='input-group'>
@@ -107,7 +122,6 @@ const Login = () => {
             </div>
           </div>
         )}
-      </section>
     </>
   )
 }

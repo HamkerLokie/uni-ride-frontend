@@ -5,7 +5,6 @@ import { faComment } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 
 const ResultCard = ({ details }) => {
-  console.log('details', details)
   const navigate = useNavigate()
 
   const handleChat = (rideId, driverId) => {
@@ -55,20 +54,31 @@ const ResultCard = ({ details }) => {
                 <p>
                   {details.vehicleType} : {details.vehicle}
                 </p>
-                <p>4+</p>
+                <p>
+                  <i class='fa-solid fa-star' style={{ color: '#FFCD60' }}></i>
+                  <i class='fa-solid fa-star' style={{ color: '#FFCD60' }}></i>
+                  <i class='fa-solid fa-star' style={{ color: '#FFCD60' }}></i>
+                  <i class='fa-solid fa-star'></i>
+                </p>
               </div>
             </div>
             <div className='details'>
-              <p>{details.from}</p>
-              <p>{details.to}</p>
-              <p style={{ fontSize: '.7em', fontWeight: '600', color: 'red' }}>
+              <p>
+                From: <span className='d'>{details.from}</span>
+              </p>
+              <p>
+                To: <span className='d'>{details.to}</span>{' '}
+              </p>
+              <span
+                style={{ fontSize: '.7em', fontWeight: '600', color: 'red' }}
+              >
                 {details.isFinalised ? (
                   <> Ride is Finalised </>
                 ) : (
                   <>Not Finalised Yet</>
                 )}
-              </p>
-              <p>Exp time - 10 mins</p>
+              </span>
+              <span className='exp'>Exp time - 10 mins</span>
             </div>
           </div>
           <div className='down'>
@@ -77,8 +87,7 @@ const ResultCard = ({ details }) => {
               <button
                 onClick={() => handleChat(details._id, details.driver._id)}
               >
-                {' '}
-                <FontAwesomeIcon className='chat-icon' icon={faComment} />
+                Vehicle Number : <span>{details.vehicleNumber} </span>
               </button>
             </div>
           </div>

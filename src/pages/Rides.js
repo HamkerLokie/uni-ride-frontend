@@ -6,6 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../axios'
 import toast from 'react-hot-toast'
 import token from '../token'
+import { Dna } from 'react-loader-spinner'
+import Footer from '../Components/Footer'
 
 const Rides = ({ location }) => {
   const [rating, setRating] = useState(0)
@@ -14,12 +16,13 @@ const Rides = ({ location }) => {
   const [fr, setfr] = useState(from)
   const [t, sett] = useState(to)
   const [rides, setRides] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const handleRatingChange = value => {
     setRating(value)
   }
-  const onTimeChange = time => {
-    setTime(time)
+  const onTimeChange = event => {
+    setTime(event.target.value)
   }
 
   const handleDateChange = event => {
@@ -47,15 +50,18 @@ const Rides = ({ location }) => {
 
   const fetchdata = async e => {
     try {
-      
+      setLoading(true)
+
       const response = await axios.get(`/search/${from}/${to}/${date}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       setRides(response.data)
-      toast.success(`Rides From ${fr} to ${t}`)
+      setLoading(false)
+      toast.success(`Rides to ${t}`)
     } catch (error) {
+      setLoading(false)
       console.log('err', error.response.data)
     }
   }
@@ -67,39 +73,71 @@ const Rides = ({ location }) => {
         toast.error('Please Login To Search')
         navigate('/')
       }
+      setLoading(true)
       const response = await axios.get(`/search/${fr}/${t}/${selectedDate}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       setRides(response.data)
-      toast.success(`Rides From ${fr} to ${t}`)
+      setLoading(false)
+      toast.success(`Rides to ${t}`)
     } catch (error) {
+      setLoading(false)
       console.log('err', error)
     }
   }
 
   const handleSearch = async limit => {
+    setLoading(true)
     try {
       const response = await axios.get(`/search-rides-by-time/${limit}`)
       console.log(response.data)
       // setResults(response.data)
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.error(error.response.data)
     }
   }
 
   const handlefilter = async link => {
+    setLoading(true)
     try {
       const response = await axios.get(`${link}/${selectedDate}`)
       console.log(response.data)
+      setLoading(false)
+
       setRides(response.data)
     } catch (error) {
+      setLoading(false)
+
       console.log(error.response.data)
     }
   }
+
+  
   return (
+    <React.Fragment>
     <div className='see-rides'>
+      {loading && (
+        <>
+          <div className='loader'>
+            <div className='pop-overlay'></div>
+            <Dna
+              height='100'
+              width='100'
+              color='#18206F'
+              secondaryColor='#FBCBDC'
+              radius='12.5'
+              ariaLabel='mutating-dots-loading'
+              wrapperStyle={{}}
+              wrapperClass='mutating-dots-loading'
+              visible={true}
+            />
+          </div>
+        </>
+      )}
       <div className='search-bar'>
         <form action=''>
           <select name='from' id='from' onChange={handleFrom}>
@@ -129,6 +167,7 @@ const Rides = ({ location }) => {
             value={selectedDate}
             id='date-inputs'
             onChange={handleDateChange}
+            className='date'
           />
 
           <input
@@ -260,7 +299,7 @@ const Rides = ({ location }) => {
               Less than 2 Person
             </button>
             <button onClick={() => handlefilter('/notfinalised')}>
-              Not Finalsed Yet
+              Not Finalised
             </button>
           </div>
           <div className='results'>
@@ -270,7 +309,7 @@ const Rides = ({ location }) => {
               })
               .reverse()}
             {rides.length === 0 && (
-              <div>
+              <div className='np'>
                 No Rides to {t} on {selectedDate}
               </div>
             )}
@@ -278,6 +317,8 @@ const Rides = ({ location }) => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </React.Fragment>
   )
 }
 

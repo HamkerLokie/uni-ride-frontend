@@ -1,11 +1,11 @@
-.form-container {
+.form-containers {
     width: 100%;
     background-color: rgba(17, 24, 39, 1);
     padding: 2rem 5em;
     color: rgba(243, 244, 246, 1);
   }
   .r-f{
-    position: fixed;
+    /* position: fixed; */
     top: 50%;
     right: 50%;
     transform: translate(100%, -50%);
@@ -14,11 +14,9 @@
 
   }
 
-  .c-r{
-    
-  }
+ 
   
-  .form-container .title {
+  .form-containers .title {
     text-align: center;
     font-size: 1.5rem;
     line-height: 2rem;
@@ -26,6 +24,8 @@
   }
   
   .form {
+    display: flex;
+    flex-direction: column;
     margin-top: 1.5rem;
   }
   

@@ -22,14 +22,12 @@ const SeeRides = () => {
     setSelectedDate(event.target.value)
   }
 
-
   const [selectedDate, setSelectedDate] = useState(date)
   const [time, setTime] = useState('')
   const handleSearch = async limit => {
     try {
       const response = await axios.get(`/search-rides-by-time/${limit}`)
       console.log(response.data)
-      // setResults(response.data)
     } catch (error) {
       console.error(error.response.data)
     }
@@ -127,7 +125,7 @@ const SeeRides = () => {
 
           <div className='right'>
             <div className='results'>
-            <ResultCard />
+              <ResultCard />
             </div>
           </div>
         </div>

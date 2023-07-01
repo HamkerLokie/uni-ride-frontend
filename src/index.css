@@ -1,17 +1,9 @@
   @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&family=Josefin+Sans&family=Julius+Sans+One&family=Prompt&display=swap');
 
-  /* 
-
-  font-family: 'Archivo Narrow', sans-serif;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Julius Sans One', sans-serif;
-  font-family: 'Prompt', sans-serif; 
-
-*/
 
   :root {
     --main-color: #F36368;
-    --yellow: #FFFA67;
+    --yellow: #121205;
     --golden: #FFCD60;
     --crimson: #FF8162;
     --light: #B6B7B7;
@@ -27,7 +19,7 @@
     --josefin: 'Josefin Sans', sans-serif;
   }
 
-  /*  */
+ 
 
   * {
     font-family: 'Prompt', sans-serif;
@@ -36,15 +28,41 @@
     box-sizing: border-box;
   }
 
+  main {
+    min-height: calc(100vh - 10vh - 20vh);
+  }
+
   /* Hide the default scrollbar */
   ::-webkit-scrollbar {
     display: none;
   }
 
+
   /* Define the styles for the custom scrollbar track */
   .scrollbar-track {
     background-color: #F5F5F5;
     border-radius: 10px;
+  }
+
+  .price {
+    font-family: var(--julius);
+    margin-left: 2%;
+    font-weight: 800;
+    color: green;
+
+  }
+
+  .chatbox button {
+    all: unset;
+    width: 100%;
+    font-size: .6em;
+  }
+
+  .chatbox button span {
+    color: crimson;
+    font-family: var(--josefin);
+    font-size: 1.5em;
+    font-weight: 500;
   }
 
   /* Define the styles for the custom scrollbar thumb */
@@ -72,12 +90,157 @@
 
   .mutating-dots-loading {
     position: fixed;
-    z-index: 12;
+    z-index: 14;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
 
+  .frto {
+    display: flex;
+    flex-direction: column;
+    gap: -3%;
+  }
+
+
+
+  .finby {
+    position: relative;
+    margin-bottom: -4%;
+    margin-left: .1%;
+    color: var(--main-color);
+    z-index: -1;
+  }
+
+  .del-btn {
+    all: unset;
+    margin-bottom: -4%;
+    background-color: var(--black);
+    color: red;
+    text-align: center;
+    border: 2px solid red;
+    width: 20%;
+    padding: .6em .3em;
+  }
+
+  .my-b button {
+    border: 0;
+    background-color: transparent;
+    border: 1px solid;
+    margin: 2% 0;
+    padding: var(--padding);
+    text-transform: uppercase;
+  }
+
+  .anbike {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: end;
+    height: 100%;
+    width: 100%;
+    border: 1px solid;
+    justify-content: end;
+    z-index: -1;
+
+  }
+
+  .anbike .anb {
+    width: 5%;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    animation-name: movebike;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  .logos.shake {
+    animation: shake 1.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+
+    20% {
+      transform: translateX(-50px);
+    }
+
+    40% {
+      transform: translateX(100px);
+    }
+
+    60% {
+      transform: translateX(-50px);
+    }
+
+    80% {
+      transform: translateX(100px);
+    }
+
+    90% {
+      transform: translateX(-20px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .gif {
+    width: 2%;
+    position: relative;
+    opacity: 0;
+  }
+
+  #bike-img {
+    width: 3%;
+    position: relative;
+    opacity: 0;
+  }
+
+
+  #trre {
+    width: 2%;
+  }
+
+
+
+  .second-animation {
+    opacity: 1;
+    animation-name: move-left;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes move-left {
+    from {
+      opacity: 0.9;
+      right: 0;
+
+    }
+
+    to {
+      opacity: 1;
+      right: 100%;
+
+    }
+  }
+
+  @keyframes movebike {
+    from {
+      right: 0;
+
+    }
+
+    to {
+      right: 100%;
+    }
+  }
 
   .loader {
     position: fixed;
@@ -107,6 +270,7 @@
     position: sticky;
     top: 0;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    z-index: 4;
   }
 
 
@@ -120,14 +284,22 @@
   }
 
   .navbar .right {
-    width: 15%;
+    width: 19%;
+    display: flex;
+    justify-content: space-around;
+
+  }
+
+  .navbar .right .btn-group{
+    width: 100%;
     display: flex;
     justify-content: space-between;
   }
 
   .navbar .right .nav-btn {
     padding: .6em .2em;
-    width: 45%;
+    width: 50%;
+    margin: 0 1%;
     background-color: transparent;
     background-color: var(--black);
     color: var(--white);
@@ -149,7 +321,6 @@
     display: flex;
     margin-top: 5%;
     justify-content: space-between;
-
     width: 80%;
   }
 
@@ -207,6 +378,29 @@
     box-shadow: 3.4552px 3.4552px 3.4552px var(--yellow), 3.4552px 3.4552px 3.4552px var(--crimson), 0px 4.39365px 4.39365px rgba(0, 0, 0, 0.25);
   }
 
+  .chatbois {
+    border: none;
+    background-color: transparent;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    background-color: var(--main-color);
+    padding: .9em .3em .9em 0em;
+    justify-content: space-between;
+    color: white;
+    border-radius: 5px;
+    margin: 2% 0em;
+  }
+
+  .chatbois img {
+    width: 30%;
+    padding: 0;
+  }
+
+  .chatbois .det {
+    padding: 0;
+    column-gap: 2%;
+  }
 
 
   .home .landing .right {
@@ -220,6 +414,14 @@
 
   .home .landing .right .imgs img {
     position: absolute;
+  }
+
+
+  .home .developers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
 
@@ -285,7 +487,7 @@
 
   .home .about {
     display: flex;
-    margin-top: 10%;
+    margin-top: 4%;
     flex-direction: column;
     width: 100%;
     justify-content: center;
@@ -407,7 +609,6 @@
 
   .see-rides {
     width: 100%;
-    border: 1px solid;
     display: flex;
     flex-direction: column;
     padding: .3em .9em;
@@ -436,6 +637,25 @@
     outline: none;
     border: none;
   }
+  input[type="time"]::-webkit-calendar-picker-indicator{
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url('./pngaaa.com-5076827.png') no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url('https://www.freeiconspng.com/thumbs/calendar-image-png/calendar-image-png-3.png') no-repeat ;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
 
   .see-rides .search-bar form input {
     background-color: black;
@@ -445,7 +665,6 @@
   .see-rides .search-result {
     margin-top: 3%;
     width: 70%;
-
     display: flex;
     gap: 5%;
   }
@@ -453,10 +672,12 @@
   .see-rides .search-result .left {
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
+    row-gap:.6em ;
     width: 20%;
     max-height: 70vh;
     overflow: scroll;
+    border-right: 3px solid gray;
+    padding-right: .6em;
   }
 
   .see-rides .search-result .left .timeslots {
@@ -471,16 +692,17 @@
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    border-right: 3px solid gray;
+    padding-right: .6em;
 
   }
 
   .see-rides .search-result .left .timeslots button {
     all: unset;
-    padding: var(--padding);
+    padding: .4em .2em;
     text-align: center;
     padding: .4em 0em;
-    border-bottom: 1px solid var(--light);
-    background-color: #FFCD60;
+    border-bottom: 2px solid gray;
 
   }
 
@@ -489,7 +711,6 @@
     text-align: center;
     padding: var(--padding);
     font-family: var(--josefin);
-
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   }
 
@@ -529,11 +750,13 @@
   }
 
 
+ 
 
   .see-rides .search-result .right {
     width: 80%;
     padding: var(--padding);
   }
+
 
   .see-rides .search-result .right .results {
     padding: var(--padding);
@@ -544,11 +767,11 @@
     display: flex;
     flex-direction: column;
     gap: 6%;
+    border-right: 2px solid gray;
   }
 
   .see-rides .search-result .more-filters {
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 8%;
@@ -564,8 +787,22 @@
     font-size: 1.3em;
     border: 1px solid;
     text-align: center;
-    border-radius: 10px;
     padding: .2em .3em;
+  }
+  .see-rides .search-result .more-filters button:hover{
+    background:linear-gradient(148.95deg, #D34848 12.51%, #FF8162 31.95%, #FFCD60 59.95%, #FFFA67 89.31%);;
+  }
+ 
+  .np{
+    font-family: var(--josefin);
+    font-weight: 800;
+    font-size: 1.6em;
+    transition: .6s;
+    background-color: var(--main-color);
+    color: white;
+    padding: 2em 0em;
+    text-align: center;
+    width: 100%;
   }
 
   .rescard {
@@ -603,7 +840,6 @@
   .rescard .top p span {
     color: var(--black);
     font-family: var(--archivo);
-    filter: drop-shadow(10px 10px 10px var(--black));
 
   }
 
@@ -612,6 +848,7 @@
     justify-content: space-between;
     align-items: center;
     padding: .8em .6em;
+
     border-bottom: 1px solid;
     box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
   }
@@ -631,13 +868,19 @@
   .rescard .middle .details {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: end;
   }
 
+
   .dri-det {
+    display: flex;
+    flex-direction: column;
     font-weight: 800;
-    width: 120%;
+  }
+
+  .dri-det p {
+    margin: -.5% 0;
   }
 
   .dri-det p:nth-child(2) {
@@ -649,15 +892,26 @@
   .rescard .middle .details p {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
+    display: flex;
+    justify-content: space-between;
 
   }
 
+  .details .d {
+    font-weight: 600;
+  }
 
-  .rescard .middle .details p:last-child {
+  .rescard .middle .details {
+    width: 20%;
+  }
+
+  .rescard .middle .details .exp {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 600;
     color: var(--light);
     font-size: .6em;
+    z-index: -1;
+
   }
 
   .rescard .down {
@@ -771,16 +1025,16 @@
 
   .chatcard {
     width: 100%;
-    margin-top: 4%;
+    margin-top: -8%;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
     padding: 0 0em 1em 0em;
     min-height: 85vh;
-    display: flex;
     display: none;
     flex-direction: column;
+    position: relative;
     justify-content: space-between;
     animation: slide-up 0.5s ease-in-out;
-
+z-index: 2;
   }
 
   .click {
@@ -795,7 +1049,7 @@
     cursor: pointer;
     outline: none;
     height: 100%;
-
+z-index: 1;
   }
 
 
@@ -816,7 +1070,7 @@
     display: flex;
   }
 
-  
+
   .chatcard .chat-mid {
     display: flex;
     flex-direction: column;
@@ -824,28 +1078,32 @@
     flex-grow: 1;
     max-height: 70vh;
     overflow-y: scroll;
+    background-color: white;
   }
 
-  
-.openchat{
-  position: relative;
-  top: 50%;
-  left: 50%;
-}
- .click:hover{
-  background-color: var(--main-color);
- }
+
+  .openchat {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: fit-content;
+    z-index: 1;
+  }
+
+  .click:hover {
+    background-color: var(--main-color);
+  }
 
   .message {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
   }
-  
-  .messageTop{
-      display: flex;
+
+  .messageTop {
+    display: flex;
   }
-  
+
   .messageImg {
     width: 32px;
     height: 32px;
@@ -853,39 +1111,39 @@
     object-fit: cover;
     margin-right: 10px;
   }
-  
-  .messageText{
-      padding: 10px;
-      border-radius: 20px;
-      background-color: var(--main-color);
-      color: white;
-      max-width: 300px;
-  }
-  
-  .messageBottom{
-      font-size: 12px;
-  }
-  
-  .message.own{
-      align-items: flex-end;
-  }
-  
-  .message.own .messageText{
-      background-color: var(--crimson) ;
-      color: black;
+
+  .messageText {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--main-color);
+    color: white;
+    max-width: 300px;
   }
 
-  
+  .messageBottom {
+    font-size: 12px;
+  }
+
+  .message.own {
+    align-items: flex-end;
+  }
+
+  .message.own .messageText {
+    background-color: var(--crimson);
+    color: black;
+  }
+
+
   .message.fade {
     opacity: 0;
     animation: slide-down 0.5s ease-in-out;
 
   }
-  
+
   .message.fade.active {
     opacity: 1;
   }
- 
+
 
 
   .chatcard .chat-down {
@@ -939,6 +1197,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--light);
+    z-index: 15;
   }
 
   .postride form {
@@ -990,10 +1249,7 @@
   /* POST RIDE ENDS */
 
 
-  footer {
-    min-height: 20vh;
-    background-color: var(--golden);
-  }
+ 
 
   @keyframes slide-up {
     from {
@@ -1006,6 +1262,7 @@
       transform: translateY(0);
     }
   }
+
   @keyframes slide-down {
     from {
       opacity: 0;
@@ -1017,3 +1274,215 @@
       transform: translate(0);
     }
   }
+
+
+  
+
+  
+
+  /* developrs */
+
+
+
+  .containerd {
+    max-width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+  }
+
+ 
+
+  .containerd .card-wrapper {
+    width: 400px;
+    height: 500px;
+    position: relative;
+  }
+
+  .containerd .card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transition: 0.5s;
+
+    .card-image {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 92%;
+      height: 92%;
+      z-index: 3;
+      background-color: #000;
+      transition: .5s;
+      
+    }
+
+    &:hover img {
+      opacity: 0.4;
+      transition: .5s;
+    }
+  }
+
+  .containerd img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .containerd .card:hover .card-image {
+    transform: translateY(-100px);
+    transition: all .9s;
+  }
+
+  /**** Social Icons *****/
+
+  .social-icons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    display: flex;
+  }
+
+  .developers h4{
+    font-size: 2em;
+    width: 100%;
+    text-align: center;
+    font-family: var(--josefin);
+    font-weight: 800;
+    padding-bottom: .4em;
+    border-bottom: 3px solid var(--golden);
+  }
+  
+  .social-icons li {
+    list-style: none;
+  }
+  
+  .social-icons li a {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #fff;
+    font-size: 23px;
+    color: #333;
+    font-weight: bold;
+    margin: 0 6px;
+    transition: 0.4s;
+    transform: translateY(200px);
+    opacity: 0;
+  }
+  
+
+  .card:hover .social-icons li a {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  .social-icons li a:hover {
+    background: #000;
+    transition: 0.01s;
+  }
+  
+  .social-icons li a:hover .fa {
+    color: var(--golden);
+  }
+  
+
+  .social-icons li a .fa {
+    transition: 0.8s;
+  }
+  
+  .social-icons li a:hover .fa-rotate {
+    transform: rotateY(360deg);
+    color: #fff;
+  }
+  
+
+  .containerd .card:hover li:nth-child(1) a {
+    transition-delay: 0.1s;
+  }
+
+  .containerd .card:hover li:nth-child(2) a {
+    transition-delay: 0.2s;
+  }
+
+  .containerd .card:hover li:nth-child(3) a {
+    transition-delay: 0.3s;
+  }
+
+  .containerd .card:hover li:nth-child(4) a {
+    transition-delay: 0.4s;
+  }
+
+  /**** Personal Details ****/
+
+  .containerd .details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: var(--main-color);
+    width: 100%;
+    height: 120px;
+    z-index: 0;
+    padding: 10px;
+  }
+
+ 
+  
+  .containerd  .details h2 {
+    margin: 30px 0;
+    padding: 0;
+    font-style: var(--archivo);
+    text-align: center;
+  }
+  
+  .containerd .details h2 .job-title {
+    font-size: 1rem;
+    font-style: var(--josefin);
+    line-height: 2.5rem;
+    color: white;
+    font-weight: 300;
+  }
+  
+
+  .jane {
+    position: absolute;
+    bottom: -120px;
+    left: 0;
+    opacity: 1;
+    background-color: var(--main-color);
+    width: 100%;
+    height: 120px;
+    z-index: 3;
+    padding: 10px;
+    transition: .4s;
+    color: var(--golden);
+  }
+
+  .profile-two .social-icons li a {
+    border-radius: 50%;
+  }
+
+  .containerd .card:hover .profile-img--two {
+    transform: rotateY(180deg);
+    margin-top: -34%;
+  }
+
+  .containerd .card:hover .jane {
+    bottom: 0;
+    left: 0;
+    transition-delay: 0.5s;
+    opacity: 1;
+  }
+
+  
