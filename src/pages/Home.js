@@ -264,7 +264,7 @@ const Home = ({ location }) => {
             <div class='card profile-two'>
               <div class='card-image profile-img--two'>
                 <img
-                  src='https://image.ibb.co/c9rY6J/profile02.jpg'
+                  src='/devs/komal.jpg'
                   alt='profile two'
                 />
               </div>

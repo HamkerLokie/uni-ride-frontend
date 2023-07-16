@@ -32,11 +32,13 @@ const Login = () => {
 
             window.location.reload(false)
           } else {
+            console.log('hiiii');
             localStorage.setItem('access_token', response.data.access_token)
             setLoading(false)
 
             window.location.reload(false)
           }
+          console.log('hii new');
         }
       }
     } catch (error) {
