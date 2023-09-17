@@ -301,7 +301,7 @@
     width: 50%;
     margin: 0 1%;
     background-color: transparent;
-    background-color: var(--crimson);
+    background-color: var(--);
     color: var(--white);
     border: none;
   }
